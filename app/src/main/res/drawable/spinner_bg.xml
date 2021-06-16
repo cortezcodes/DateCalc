@@ -1,22 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android"
     android:exitFadeDuration="@android:integer/config_mediumAnimTime">
-
-    <item
-        android:state_pressed="true"
-        android:drawable="@color/white" />
-    <item
-        android:state_selected="true"
-        android:drawable="@color/white"/>
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <stroke android:width="2dp"
+                android:color="@color/gray"/>
+            <solid android:color="@color/white"/>
+            <corners android:radius="32dp"/>
+        </shape>
+    </item>
+    <item android:state_selected="true">
+        <shape android:shape="rectangle">
+            <stroke android:width="2dp"
+                android:color="@color/gray"/>
+            <solid android:color="@color/white"/>
+            <corners android:radius="32dp"/>
+        </shape>
+    </item>
     <item>
-        <inset android:insetLeft="-1dp" android:insetRight="-1dp">
-            <shape android:shape="rectangle">
-                <stroke android:width="2dp"
-                    android:color="@color/white"/>
-                <solid android:color="@color/gray"/>
-                <corners android:radius="32dp"/>
-            </shape>
-        </inset>
+        <layer-list>
+            <item>
+                <shape android:shape="rectangle">
+                    <stroke android:width="2dp"
+                        android:color="@color/white"/>
+                    <solid android:color="@color/gray"/>
+                    <corners android:radius="32dp"/>
+                </shape>
+            </item>
+            <item
+                android:gravity="center_vertical|right"
+                android:left="10dp"
+                android:drawable="@drawable/ic_baseline_arrow_drop_down_24">
+            </item>
+        </layer-list>
+
     </item>
 
 </selector>

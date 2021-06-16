@@ -15,8 +15,8 @@ class MainActivity : AppCompatActivity() {
         //set ArrayAdapter for month spinner
         val spinner = binding.spinnerMonth
         ArrayAdapter.createFromResource(this,R.array.months_array,
-            android.R.layout.simple_spinner_item).also { arrayAdapter ->
-            arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            R.layout.spinner_item).also { arrayAdapter ->
+            arrayAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item)
             spinner.adapter = arrayAdapter
         }
 
