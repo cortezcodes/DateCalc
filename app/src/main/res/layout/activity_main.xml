@@ -44,7 +44,7 @@
         android:paddingStart="16dp"
         android:paddingEnd="4dp"/>
 
-    <androidx.appcompat.widget.AppCompatSpinner
+    <Spinner
         android:id="@+id/spinner_from_month"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -53,30 +53,44 @@
         app:layout_constraintBottom_toBottomOf="@id/title_from"
         android:spinnerMode="dropdown"
         android:dropDownVerticalOffset="72dp"
-        android:background="@drawable/spinner_bg"
+        android:background="@drawable/bg_spinner"
         android:paddingStart="8dp"
         android:paddingEnd="8dp"
         />
 
-    <androidx.appcompat.widget.AppCompatSpinner
+    <Spinner
         android:id="@+id/spinner_from_day"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="@id/title_from"
         app:layout_constraintStart_toEndOf="@id/spinner_from_month"
+        app:layout_constraintBottom_toBottomOf="@id/title_from"
         android:paddingStart="8dp"
         android:paddingEnd="8dp"
-        android:background="@drawable/spinner_bg"/>
+        android:background="@drawable/bg_spinner"/>
 
-    <androidx.appcompat.widget.AppCompatSpinner
+    <Spinner
         android:id="@+id/spinner_from_year"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="@id/title_from"
         app:layout_constraintStart_toEndOf="@id/spinner_from_day"
+        app:layout_constraintBottom_toBottomOf="@id/title_from"
         android:paddingStart="8dp"
         android:paddingEnd="8dp"
-        android:background="@drawable/spinner_bg"/>
+        android:background="@drawable/bg_spinner"/>
+
+    <ImageButton
+        android:id="@+id/img_btn_from_calendar"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/title_from"
+        app:layout_constraintStart_toEndOf="@id/spinner_from_year"
+        app:layout_constraintBottom_toBottomOf="@id/title_from"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:contentDescription="@string/img_btn_content_descriptor_calendar"
+        android:src="@drawable/ic_baseline_date_range_24"/>
 
 
 

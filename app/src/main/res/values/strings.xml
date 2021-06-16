@@ -21,4 +21,5 @@
         <item>December</item>
     </string-array>
 
+    <string name="img_btn_content_descriptor_calendar">Open Calendar</string>
 </resources>
