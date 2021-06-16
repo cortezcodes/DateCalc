@@ -214,6 +214,19 @@
         android:background="@drawable/bg_calendar_btn"
         android:src="@drawable/ic_baseline_date_range_24"/>
 
-
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="16dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:background="@drawable/bg_btn_calculate"
+        android:fontFamily="serif-monospace"
+        android:textSize="36dp"
+        android:textColor="@color/white"
+        android:text="@string/calculate"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

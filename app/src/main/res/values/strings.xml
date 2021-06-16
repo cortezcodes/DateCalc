@@ -6,6 +6,7 @@
     <string name="title_to">To:</string>
     <string name="backslash">/</string>
     <string name="year">Year</string>
+    <string name="calculate">CALCULATE</string>
 
     <string-array name="months_array">
         <item>Month</item>
