@@ -2,10 +2,27 @@ package com.example.datecalc
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ArrayAdapter
+import com.example.datecalc.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+
+        //set ArrayAdapter for month spinner
+        val spinner = binding.spinnerMonth
+        ArrayAdapter.createFromResource(this,R.array.months_array,
+            android.R.layout.simple_spinner_item).also { arrayAdapter ->
+            arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinner.adapter = arrayAdapter
+        }
+
+        val view = binding.root
+        setContentView(view)
     }
+
+
 }

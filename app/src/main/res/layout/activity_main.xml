@@ -18,6 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:padding="8dp"/>
+
     <TextView
         android:id="@+id/logo_calc"
         android:layout_width="wrap_content"
@@ -31,14 +32,34 @@
         app:layout_constraintTop_toTopOf="parent"
         android:paddingTop="8dp"
         android:paddingBottom="8dp"/>
+    
     <TextView
         android:id="@+id/title_from"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/title_from"
-        android:theme="@style/Titles"
+        style="@style/Titles"
         app:layout_constraintTop_toBottomOf="@+id/logo_date"
         app:layout_constraintStart_toStartOf="parent"
-        android:paddingStart="8dp"/>
+        android:paddingStart="16dp"
+        android:paddingEnd="4dp"/>
+
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/spinner_month"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/title_from"
+        app:layout_constraintStart_toStartOf="@id/title_from"
+        android:paddingStart="16dp"
+        android:paddingEnd="8dp"
+        />
+
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/spinner_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Spinners"
+        app:layout_constraintTop_toBottomOf="@id/title_from"
+        app:layout_constraintStart_toEndOf="@id/spinner_month"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
