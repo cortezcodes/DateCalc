@@ -90,6 +90,7 @@
         android:paddingStart="8dp"
         android:paddingEnd="8dp"
         android:contentDescription="@string/img_btn_content_descriptor_calendar"
+        android:background="@drawable/bg_calendar_btn"
         android:src="@drawable/ic_baseline_date_range_24"/>
 
 
