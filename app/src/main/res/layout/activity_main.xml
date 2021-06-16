@@ -74,7 +74,10 @@
         app:layout_constraintTop_toTopOf="@id/title_from"
         app:layout_constraintStart_toEndOf="@id/month_day_backslash"
         app:layout_constraintBottom_toBottomOf="@id/title_from"
+        android:spinnerMode="dropdown"
+        android:dropDownVerticalOffset="72dp"
         android:layout_margin="4dp"
+        android:paddingEnd="16dp"
         android:background="@drawable/bg_spinner" />
 
     <TextView
@@ -112,6 +115,98 @@
         app:layout_constraintTop_toTopOf="@id/title_from"
         app:layout_constraintStart_toEndOf="@id/et_from_year"
         app:layout_constraintBottom_toBottomOf="@id/title_from"
+        android:layout_margin="4dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:contentDescription="@string/img_btn_content_descriptor_calendar"
+        android:background="@drawable/bg_calendar_btn"
+        android:src="@drawable/ic_baseline_date_range_24"/>
+
+    <TextView
+        android:id="@+id/title_to"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title_to"
+        style="@style/Titles"
+        app:layout_constraintTop_toBottomOf="@+id/title_from"
+        app:layout_constraintStart_toStartOf="parent"
+        android:paddingStart="16dp"
+        android:paddingEnd="35dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"/>
+
+    <Spinner
+        android:id="@+id/spinner_to_month"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/title_to"
+        app:layout_constraintStart_toEndOf="@id/title_to"
+        app:layout_constraintBottom_toBottomOf="@id/title_to"
+        android:spinnerMode="dropdown"
+        android:dropDownVerticalOffset="72dp"
+        android:background="@drawable/bg_spinner"
+        android:layout_margin="4dp"/>
+
+    <TextView
+        android:id="@+id/to_month_day_backslash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/title_to"
+        app:layout_constraintStart_toEndOf="@id/spinner_to_month"
+        app:layout_constraintBottom_toBottomOf="@id/title_to"
+        android:layout_margin="4dp"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        android:text="@string/backslash"/>
+
+    <Spinner
+        android:id="@+id/spinner_to_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/title_to"
+        app:layout_constraintStart_toEndOf="@id/to_month_day_backslash"
+        app:layout_constraintBottom_toBottomOf="@id/title_to"
+        android:spinnerMode="dropdown"
+        android:dropDownVerticalOffset="72dp"
+        android:paddingEnd="16dp"
+        android:layout_margin="4dp"
+        android:background="@drawable/bg_spinner" />
+
+    <TextView
+        android:id="@+id/to_day_year_backslash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/title_to"
+        app:layout_constraintStart_toEndOf="@id/spinner_to_day"
+        app:layout_constraintBottom_toBottomOf="@id/title_to"
+        android:layout_margin="4dp"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        android:text="@string/backslash"/>
+
+    <EditText
+        android:id="@+id/et_to_year"
+        android:inputType="date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/title_to"
+        app:layout_constraintBottom_toBottomOf="@id/title_to"
+        app:layout_constraintStart_toEndOf="@id/to_day_year_backslash"
+        android:layout_margin="4dp"
+        android:paddingStart="4dp"
+        android:paddingEnd="16dp"
+        android:hint="@string/year"
+        android:background="@drawable/bg_year_edit_text"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"/>
+
+    <ImageButton
+        android:id="@+id/img_btn_to_calendar"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/title_to"
+        app:layout_constraintStart_toEndOf="@id/et_to_year"
+        app:layout_constraintBottom_toBottomOf="@id/title_to"
         android:layout_margin="4dp"
         android:paddingStart="8dp"
         android:paddingEnd="8dp"
