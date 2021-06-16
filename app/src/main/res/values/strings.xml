@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Date Calc</string>
+    <string name="logo_date">Date</string>
+    <string name="logo_calc">Calc</string>
+    <string name="title_from">From:</string>
+    <string name="title_to">To:</string>
+</resources>
