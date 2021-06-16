@@ -223,10 +223,13 @@
         android:layout_marginBottom="16dp"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
         android:background="@drawable/bg_btn_calculate"
         android:fontFamily="serif-monospace"
+        android:textAlignment="center"
         android:textSize="36dp"
-        android:textColor="@color/white"
+        android:textColor="@color/btn_text_color"
         android:text="@string/calculate"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
