@@ -45,7 +45,7 @@
         android:paddingEnd="4dp"/>
 
     <androidx.appcompat.widget.AppCompatSpinner
-        android:id="@+id/spinner_month"
+        android:id="@+id/spinner_from_month"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="@id/title_from"
@@ -59,11 +59,25 @@
         />
 
     <androidx.appcompat.widget.AppCompatSpinner
-        android:id="@+id/spinner_day"
+        android:id="@+id/spinner_from_day"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="@id/title_from"
-        app:layout_constraintStart_toEndOf="@id/spinner_month"
-        android:popupBackground="@drawable/spinner_bg"/>
+        app:layout_constraintStart_toEndOf="@id/spinner_from_month"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:background="@drawable/spinner_bg"/>
+
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/spinner_from_year"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/title_from"
+        app:layout_constraintStart_toEndOf="@id/spinner_from_day"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:background="@drawable/spinner_bg"/>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
