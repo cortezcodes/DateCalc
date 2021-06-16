@@ -215,6 +215,7 @@
         android:src="@drawable/ic_baseline_date_range_24"/>
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_calculate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -2,69 +2,129 @@ package com.example.datecalc
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
+import android.widget.*
 import com.example.datecalc.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener, View.OnClickListener {
+class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private var fromMonth = 0
+    private var fromDay = 0
+    private var toMonth = 0
+    private var toDay = 0
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
+        val fromMonthSpinner = binding.spinnerFromMonth
+        val toMonthSpinner = binding.spinnerToMonth
+        val fromDaySpinner = binding.spinnerFromDay
+        val toDaySpinner = binding.spinnerToDay
+        val fromYearEditText = binding.etFromYear
+        val toYearEditText = binding.etToYear
+
+        //initial setup of day spinners
+        fromDaySpinner.adapter = setDaySpinnerAdapter(R.array.day_array)
+        toDaySpinner.adapter = setDaySpinnerAdapter(R.array.day_array)
+
 
         //set ArrayAdapter for month spinner
-        val fromMonthSpinner = binding.spinnerFromMonth
         ArrayAdapter.createFromResource(this,R.array.months_array,
             R.layout.spinner_item).also { arrayAdapter ->
             arrayAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item)
             fromMonthSpinner.adapter = arrayAdapter
         }
 
-        //set ArrayAdapter for to month spinner
+        fromMonthSpinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, pos: Int, id: Long) {
+                    when(pos){ //based off the month select change the number of days within the month
+                        4,6,9,11 -> fromDaySpinner.adapter = setDaySpinnerAdapter(R.array.day_array_short)
+                        1,3,5,7,8,10,12 -> fromDaySpinner.adapter = setDaySpinnerAdapter(R.array.day_array)
+                        2 -> fromDaySpinner.adapter = setDaySpinnerAdapter(R.array.day_array_feb)
+                    }
+                fromMonth = pos
+            }
 
-        val toMonthSpinner = binding.spinnerToMonth
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+
+        }
+
+        //set ArrayAdapter for to month spinner
         ArrayAdapter.createFromResource(this,R.array.months_array,
             R.layout.spinner_item).also { arrayAdapter ->
             arrayAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item)
             toMonthSpinner.adapter = arrayAdapter
         }
 
-        //set ArrayAdapter for from day spinner
-        val fromDaySpinner = binding.spinnerFromDay
-        ArrayAdapter.createFromResource(this,R.array.day_array,R.layout.spinner_item).also{
-                arrayAdapter -> arrayAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item)
-            fromDaySpinner.adapter = arrayAdapter
+        toMonthSpinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, pos: Int, id: Long) {
+                when(pos){
+                    4,6,9,11 -> toDaySpinner.adapter = setDaySpinnerAdapter(R.array.day_array_short)
+                    1,3,5,7,8,10,12 -> toDaySpinner.adapter = setDaySpinnerAdapter(R.array.day_array)
+                    2 -> toDaySpinner.adapter = setDaySpinnerAdapter(R.array.day_array_feb)
+                }
+                toMonth = pos
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+
         }
 
-        //set ArrayAdapter for to day spinner
-        val toDaySpinner = binding.spinnerToDay
-        ArrayAdapter.createFromResource(this,R.array.day_array,R.layout.spinner_item).also{
-                arrayAdapter -> arrayAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item)
-            toDaySpinner.adapter = arrayAdapter
+        fromDaySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, pos: Int, id: Long) {
+                fromDay = pos
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+
+        }
+
+        toDaySpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, pos: Int, id: Long) {
+                toDay = pos
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+
+        }
+
+
+
+        //set onClickListener for calculate button
+        val calculateButton = binding.btnCalculate
+
+        calculateButton.setOnClickListener {
+            var fromYear = fromYearEditText.text
+            var toYear = toYearEditText.text
+            if(!TextUtils.isEmpty(fromYear) && !TextUtils.isEmpty(toYear)) {
+                Toast.makeText(
+                    applicationContext,
+                    "From: ${fromMonth}/${fromDay}/${fromYear} To: ${toMonth}/${toDay}/${toYear}",
+                    Toast.LENGTH_LONG
+                ).show()
+            } else{
+                Toast.makeText(applicationContext,"Please include year",Toast.LENGTH_LONG).show()
+            }
         }
 
         val view = binding.root
         setContentView(view)
     }
 
-    override fun onItemSelected(parent: AdapterView<*>?, view: View?, pos: Int, id: Long) {
-            when(parent?.id){
-                binding.spinnerFromMonth.id -> {
 
-                }
-            }
-
+    fun setDaySpinnerAdapter(res: Int ): ArrayAdapter<CharSequence> {
+        val adapter = ArrayAdapter.createFromResource(this, res, R.layout.spinner_item)
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item)
+        return adapter
     }
-
-    override fun onNothingSelected(p0: AdapterView<*>?) {
-        TODO("Not yet implemented")
-    }
-
-    override fun onClick(p0: View?) {
-        
-    }
-
-
 }
