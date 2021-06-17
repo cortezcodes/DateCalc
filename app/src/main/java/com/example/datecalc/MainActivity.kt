@@ -50,9 +50,18 @@ class MainActivity : AppCompatActivity() {
         fromMonthSpinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, pos: Int, id: Long) {
                     when(pos){ //based off the month select change the number of days within the month
-                        4,6,9,11 -> fromDaySpinner.adapter = setDaySpinnerAdapter(R.array.day_array_short)
-                        1,3,5,7,8,10,12 -> fromDaySpinner.adapter = setDaySpinnerAdapter(R.array.day_array)
-                        2 -> fromDaySpinner.adapter = setDaySpinnerAdapter(R.array.day_array_feb)
+                        4,6,9,11 -> {
+                            fromDaySpinner.adapter = setDaySpinnerAdapter(R.array.day_array_short)
+                            fromDaySpinner.setSelection(fromDay)
+                        }
+                        1,3,5,7,8,10,12 -> {
+                            fromDaySpinner.adapter = setDaySpinnerAdapter(R.array.day_array)
+                            fromDaySpinner.setSelection(fromDay)
+                        }
+                        2 -> {
+                            fromDaySpinner.adapter = setDaySpinnerAdapter(R.array.day_array_feb)
+                            fromDaySpinner.setSelection(fromDay)
+                        }
                     }
                 fromMonth = pos
             }
