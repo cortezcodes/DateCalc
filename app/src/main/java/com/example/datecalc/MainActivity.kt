@@ -3,9 +3,12 @@ package com.example.datecalc
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import android.widget.*
 import com.example.datecalc.databinding.ActivityMainBinding
+import java.time.DateTimeException
+import java.time.LocalDate
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -24,6 +27,8 @@ class MainActivity : AppCompatActivity() {
         val toDaySpinner = binding.spinnerToDay
         val fromYearEditText = binding.etFromYear
         val toYearEditText = binding.etToYear
+        val calculateButton = binding.btnCalculate
+        val outputTextview = binding.tvOutput
 
         //initial setup of day spinners
         fromDaySpinner.adapter = setDaySpinnerAdapter(R.array.day_array)
@@ -101,19 +106,30 @@ class MainActivity : AppCompatActivity() {
 
 
         //set onClickListener for calculate button
-        val calculateButton = binding.btnCalculate
+
 
         calculateButton.setOnClickListener {
             var fromYear = fromYearEditText.text
             var toYear = toYearEditText.text
+
             if(!TextUtils.isEmpty(fromYear) && !TextUtils.isEmpty(toYear)) {
-                Toast.makeText(
-                    applicationContext,
-                    "From: ${fromMonth}/${fromDay}/${fromYear} To: ${toMonth}/${toDay}/${toYear}",
-                    Toast.LENGTH_LONG
-                ).show()
+                try {
+                    var fromEvent = LocalDate.of(fromYear.toString().toInt(), fromMonth, fromDay)
+                    var toEvent = LocalDate.of(toYear.toString().toInt(), toMonth, toDay)
+                    val string = Event.fullResponse(fromEvent, toEvent)
+                    outputTextview.text = string
+                } catch (e:DateTimeException){
+                    val string = "Invalid input, please check the following: \n" +
+                            "1. Feb 29 must fall on a leap year.\n" +
+                            "2. All fields must have valid input."
+                    Log.e("DateTimeException", e.toString())
+                    outputTextview.text  = string
+                }
+
             } else{
-                Toast.makeText(applicationContext,"Please include year",Toast.LENGTH_LONG).show()
+                val str = "Please include years"
+                outputTextview.text = str
+                //TODO("Make the empty year editText highlighted")
             }
         }
 
