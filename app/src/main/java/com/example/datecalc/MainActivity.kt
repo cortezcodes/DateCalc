@@ -3,7 +3,6 @@ package com.example.datecalc
 import android.app.DatePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
@@ -82,9 +81,18 @@ class MainActivity : AppCompatActivity() {
         toMonthSpinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, pos: Int, id: Long) {
                 when(pos){
-                    4,6,9,11 -> toDaySpinner.adapter = setDaySpinnerAdapter(R.array.day_array_short)
-                    1,3,5,7,8,10,12 -> toDaySpinner.adapter = setDaySpinnerAdapter(R.array.day_array)
-                    2 -> toDaySpinner.adapter = setDaySpinnerAdapter(R.array.day_array_feb)
+                    4,6,9,11 -> {
+                        toDaySpinner.adapter = setDaySpinnerAdapter(R.array.day_array_short)
+                        toDaySpinner.setSelection(toDay)
+                    }
+                    1,3,5,7,8,10,12 -> {
+                        toDaySpinner.adapter = setDaySpinnerAdapter(R.array.day_array)
+                        toDaySpinner.setSelection(toDay)
+                    }
+                    2 -> {
+                        toDaySpinner.adapter = setDaySpinnerAdapter(R.array.day_array_feb)
+                        toDaySpinner.setSelection(toDay)
+                    }
                 }
                 toMonth = pos
             }
@@ -147,7 +155,7 @@ class MainActivity : AppCompatActivity() {
 
         val view = binding.root
 
-        //set onclicklistener for DatePicker
+        //set onclicklistener for fromDatePicker
         fromCalendarImgBtn.setOnClickListener{
             val calendar = Calendar.getInstance()
             val year = calendar.get(Calendar.YEAR)
@@ -161,6 +169,24 @@ class MainActivity : AppCompatActivity() {
                     fromMonthSpinner.setSelection(monthofYear+1)
                     fromDaySpinner.setSelection(dayOfMonth)
                     fromDay = dayOfMonth
+                }, year, month, day)
+            datePickerDialog.show()
+        }
+
+        //set onclickListener for toDateCalendarBtn
+        toCalendarImgBtn.setOnClickListener{
+            val calendar = Calendar.getInstance()
+            val year = calendar.get(Calendar.YEAR)
+            val month = calendar.get(Calendar.MONTH)
+            val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+            val datePickerDialog = DatePickerDialog(this,
+                DatePickerDialog.OnDateSetListener{
+                        view, year, monthofYear, dayOfMonth -> {}
+                    toYearEditText.setText(year.toString())
+                    toMonthSpinner.setSelection(monthofYear+1)
+                    toDaySpinner.setSelection(dayOfMonth)
+                    toDay = dayOfMonth
                 }, year, month, day)
             datePickerDialog.show()
         }
