@@ -1,7 +1,9 @@
 package com.example.datecalc
 
+import android.app.DatePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
@@ -9,6 +11,7 @@ import android.widget.*
 import com.example.datecalc.databinding.ActivityMainBinding
 import java.time.DateTimeException
 import java.time.LocalDate
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -29,6 +32,8 @@ class MainActivity : AppCompatActivity() {
         val toYearEditText = binding.etToYear
         val calculateButton = binding.btnCalculate
         val outputTextview = binding.tvOutput
+        val fromCalendarImgBtn = binding.imgBtnFromCalendar
+        val toCalendarImgBtn = binding.imgBtnToCalendar
 
         //initial setup of day spinners
         fromDaySpinner.adapter = setDaySpinnerAdapter(R.array.day_array)
@@ -106,8 +111,6 @@ class MainActivity : AppCompatActivity() {
 
 
         //set onClickListener for calculate button
-
-
         calculateButton.setOnClickListener {
             var fromYear = fromYearEditText.text
             var toYear = toYearEditText.text
@@ -134,6 +137,24 @@ class MainActivity : AppCompatActivity() {
         }
 
         val view = binding.root
+
+        //set onclicklistener for DatePicker
+        fromCalendarImgBtn.setOnClickListener{
+            val calendar = Calendar.getInstance()
+            val year = calendar.get(Calendar.YEAR)
+            val month = calendar.get(Calendar.MONTH)
+            val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+            val datePickerDialog = DatePickerDialog(this,
+                DatePickerDialog.OnDateSetListener{
+                    view, year, monthofYear, dayOfMonth -> {}
+                    fromYearEditText.setText(year.toString())
+                    fromMonthSpinner.setSelection(monthofYear+1)
+                    fromDaySpinner.setSelection(dayOfMonth)
+                    fromDay = dayOfMonth
+                }, year, month, day)
+            datePickerDialog.show()
+        }
         setContentView(view)
     }
 
