@@ -94,7 +94,7 @@
 
     <EditText
         android:id="@+id/et_from_year"
-        android:inputType="date"
+        android:inputType="numberSigned"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="@id/title_from"
@@ -104,6 +104,7 @@
         android:paddingStart="4dp"
         android:paddingEnd="16dp"
         android:hint="@string/year"
+        android:maxLength="9"
         android:background="@drawable/bg_year_edit_text"
         android:textColor="@color/white"
         android:textColorHint="@color/white"/>
@@ -132,7 +133,7 @@
         app:layout_constraintTop_toBottomOf="@+id/title_from"
         app:layout_constraintStart_toStartOf="parent"
         android:paddingStart="16dp"
-        android:paddingEnd="35dp"
+        android:paddingEnd="40dp"
         android:paddingTop="12dp"
         android:paddingBottom="12dp"/>
 
@@ -187,7 +188,7 @@
 
     <EditText
         android:id="@+id/et_to_year"
-        android:inputType="date"
+        android:inputType="numberSigned"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="@id/title_to"
@@ -197,6 +198,7 @@
         android:paddingStart="4dp"
         android:paddingEnd="16dp"
         android:hint="@string/year"
+        android:maxLength="9"
         android:background="@drawable/bg_year_edit_text"
         android:textColor="@color/white"
         android:textColorHint="@color/white"/>

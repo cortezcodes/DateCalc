@@ -158,9 +158,19 @@ class MainActivity : AppCompatActivity() {
         //set onclicklistener for fromDatePicker
         fromCalendarImgBtn.setOnClickListener{
             val calendar = Calendar.getInstance()
-            val year = calendar.get(Calendar.YEAR)
-            val month = calendar.get(Calendar.MONTH)
-            val day = calendar.get(Calendar.DAY_OF_MONTH)
+            var year = calendar.get(Calendar.YEAR)
+            var month = calendar.get(Calendar.MONTH)
+            var day = calendar.get(Calendar.DAY_OF_MONTH)
+            //if the fields have already been set, then set the calendar to that date
+            if(fromMonth != 0) month = fromMonth - 1 //DatePickers months are 0 = January & 11 = December
+            if(fromDay != 0) day = fromDay
+            if(fromYearEditText.text.toString() != ""){ // year is only between 1900 and 2100
+                val yearLimiter = fromYearEditText.text.toString().toInt()
+                if(yearLimiter <= 2100 && yearLimiter >= 1900) year = fromYearEditText.text.toString().toInt()
+                else if(yearLimiter >2100) year = 2100
+                else year = 1900
+            }
+
 
             val datePickerDialog = DatePickerDialog(this,
                 DatePickerDialog.OnDateSetListener{
