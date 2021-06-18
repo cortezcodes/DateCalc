@@ -3,11 +3,13 @@ package com.example.datecalc
 import android.app.DatePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import android.widget.*
 import com.example.datecalc.databinding.ActivityMainBinding
+import java.lang.NumberFormatException
 import java.time.DateTimeException
 import java.time.LocalDate
 import java.util.*
@@ -33,6 +35,8 @@ class MainActivity : AppCompatActivity() {
         val outputTextview = binding.tvOutput
         val fromCalendarImgBtn = binding.imgBtnFromCalendar
         val toCalendarImgBtn = binding.imgBtnToCalendar
+        val toADBCSwitch = binding.switchToBcAd
+        val fromADBCSwitch = binding.switchFromBcAd
 
         //initial setup of day spinners
         fromDaySpinner.adapter = setDaySpinnerAdapter(R.array.day_array)
@@ -129,28 +133,47 @@ class MainActivity : AppCompatActivity() {
 
         //set onClickListener for calculate button
         calculateButton.setOnClickListener {
-            var fromYear = fromYearEditText.text
-            var toYear = toYearEditText.text
-
-            if(!TextUtils.isEmpty(fromYear) && !TextUtils.isEmpty(toYear)) {
-                try {
-                    var fromEvent = LocalDate.of(fromYear.toString().toInt(), fromMonth, fromDay)
-                    var toEvent = LocalDate.of(toYear.toString().toInt(), toMonth, toDay)
-                    val string = Event.fullResponse(fromEvent, toEvent)
-                    outputTextview.text = string
-                } catch (e:DateTimeException){
-                    val string = "Invalid input, please check the following: \n" +
-                            "1. Feb 29 must fall on a leap year.\n" +
-                            "2. All fields must have valid input."
-                    Log.e("DateTimeException", e.toString())
-                    outputTextview.text  = string
-                }
-
-            } else{
-                val str = "Please include years"
-                outputTextview.text = str
-                //TODO("Make the empty year editText highlighted")
+            var fromYear = 0
+            var toYear = 0
+            try{ // catch exception if EditText is empty
+                fromYear = fromYearEditText.text.toString().toInt()
+            } catch (e: NumberFormatException){
+                outputTextview.text = getString(R.string.fromYearException)
+                Log.e("Retrieving fromYearEditText", e.toString())
+                return@setOnClickListener
             }
+            try { // catch exception if EditText is empty
+                toYear = toYearEditText.text.toString().toInt()
+            }catch (e: NumberFormatException){
+                outputTextview.text = getString(R.string.toYearException)
+                Log.e("Retrieving toYearEditText", e.toString())
+                return@setOnClickListener
+            }
+
+            if(fromADBCSwitch.isActivated){ //check if AD BC switch is active
+                fromYear *= -1
+                Log.d("fromADBCSwitch","Switch is activated to B.C., year must" +
+                        " be a negative value. fromYear = ${fromYear}")
+            }
+            if(toADBCSwitch.isActivated){  //check if AD BC switch is active
+                toYear *= -1
+                Log.d("toADBCSwitch","Switch is activated to B.C., year must" +
+                        " be a negative value. toYear = ${toYear}")
+            }
+
+            try{
+                var fromEvent = LocalDate.of(fromYear, fromMonth, fromDay)
+                var toEvent = LocalDate.of(toYear, toMonth, toDay)
+                val string = Event.fullResponse(fromEvent, toEvent)
+                outputTextview.text = string
+            } catch (e:DateTimeException){
+                val string = "Invalid input, please check the following: \n" +
+                        "1. Feb 29 must fall on a leap year.\n" +
+                        "2. All fields must have valid input."
+                Log.e("DateTimeException", e.toString())
+                outputTextview.text  = string
+            }
+
         }
 
         val view = binding.root
