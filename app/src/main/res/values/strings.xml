@@ -8,6 +8,8 @@
     <string name="year">Year</string>
     <string name="calculate">CALCULATE</string>
     <string name="present_day">Today</string>
+    <string name="AD">A.D.</string>
+    <string name="BC">B.C.</string>
 
     <string-array name="months_array">
         <item>Month</item>

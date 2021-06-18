@@ -94,7 +94,7 @@
 
     <EditText
         android:id="@+id/et_from_year"
-        android:inputType="numberSigned"
+        android:inputType="date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="@id/title_from"
@@ -108,6 +108,20 @@
         android:background="@drawable/bg_year_edit_text"
         android:textColor="@color/white"
         android:textColorHint="@color/white"/>
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switch_from_bc_ad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/et_from_year"
+        app:layout_constraintStart_toStartOf="@id/et_from_year"
+        app:layout_constraintEnd_toEndOf="@id/et_from_year"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:theme="@style/SwitchCompatTheme"
+        app:showText="true"
+        android:textOn="@string/BC"
+        android:textOff="@string/AD"/>
 
     <ImageButton
         android:id="@+id/img_btn_from_calendar"
@@ -130,7 +144,7 @@
         android:layout_height="wrap_content"
         android:text="@string/title_to"
         style="@style/Titles"
-        app:layout_constraintTop_toBottomOf="@+id/title_from"
+        app:layout_constraintTop_toBottomOf="@+id/switch_from_bc_ad"
         app:layout_constraintStart_toStartOf="parent"
         android:paddingStart="16dp"
         android:paddingEnd="40dp"
@@ -188,7 +202,7 @@
 
     <EditText
         android:id="@+id/et_to_year"
-        android:inputType="numberSigned"
+        android:inputType="date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="@id/title_to"
@@ -202,6 +216,21 @@
         android:background="@drawable/bg_year_edit_text"
         android:textColor="@color/white"
         android:textColorHint="@color/white"/>
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switch_to_bc_ad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/et_to_year"
+        app:layout_constraintStart_toStartOf="@id/et_to_year"
+        app:layout_constraintEnd_toEndOf="@id/et_to_year"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:theme="@style/SwitchCompatTheme"
+        app:showText="true"
+        android:textOn="@string/BC"
+        android:textOff="@string/AD"/>
+
 
     <ImageButton
         android:id="@+id/img_btn_to_calendar"
