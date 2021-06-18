@@ -20,6 +20,14 @@ class MainActivity : AppCompatActivity() {
     private var fromDay = 0
     private var toMonth = 0
     private var toDay = 0
+    private lateinit var outputTextview: TextView
+    private val ISVALIDINPUT_FALSE = 0
+    private val ISVALIDINPUT_TRUE = 1
+    private val ISVALIDINPUT_FROM_DEFAULT = 2
+    private val ISVALIDINPUT_TO_DEFAULT = 3
+    private val ISVALIDINPUT_ALL_DEFAULT = 4
+
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         val fromYearEditText = binding.etFromYear
         val toYearEditText = binding.etToYear
         val calculateButton = binding.btnCalculate
-        val outputTextview = binding.tvOutput
+        outputTextview = binding.tvOutput
         val fromCalendarImgBtn = binding.imgBtnFromCalendar
         val toCalendarImgBtn = binding.imgBtnToCalendar
         val toADBCSwitch = binding.switchToBcAd
@@ -113,7 +121,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
-                TODO("Not yet implemented")
+
             }
 
         }
@@ -124,7 +132,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
-                TODO("Not yet implemented")
+
             }
 
         }
@@ -138,14 +146,14 @@ class MainActivity : AppCompatActivity() {
             try{ // catch exception if EditText is empty
                 fromYear = fromYearEditText.text.toString().toInt()
             } catch (e: NumberFormatException){
-                outputTextview.text = getString(R.string.fromYearException)
+                outputTextview.text = getString(R.string.from_year_exception)
                 Log.e("Retrieving fromYearEditText", e.toString())
                 return@setOnClickListener
             }
             try { // catch exception if EditText is empty
                 toYear = toYearEditText.text.toString().toInt()
             }catch (e: NumberFormatException){
-                outputTextview.text = getString(R.string.toYearException)
+                outputTextview.text = getString(R.string.to_year_exception)
                 Log.e("Retrieving toYearEditText", e.toString())
                 return@setOnClickListener
             }
@@ -160,19 +168,14 @@ class MainActivity : AppCompatActivity() {
                 Log.d("toADBCSwitch","Switch is activated to B.C., year must" +
                         " be a negative value. toYear = ${toYear}")
             }
-
-            try{
-                var fromEvent = LocalDate.of(fromYear, fromMonth, fromDay)
-                var toEvent = LocalDate.of(toYear, toMonth, toDay)
-                val string = Event.fullResponse(fromEvent, toEvent)
-                outputTextview.text = string
-            } catch (e:DateTimeException){
-                val string = "Invalid input, please check the following: \n" +
-                        "1. Feb 29 must fall on a leap year.\n" +
-                        "2. All fields must have valid input."
-                Log.e("DateTimeException", e.toString())
-                outputTextview.text  = string
+            when(isValidInput()){
+                ISVALIDINPUT_FALSE -> return@setOnClickListener
+                ISVALIDINPUT_TRUE -> outputAnswer(fromYear, fromMonth, fromDay, toYear, toMonth, toDay)
+                ISVALIDINPUT_FROM_DEFAULT -> outputAnswer(fromYear, 1, 1, toYear, toMonth, toDay)
+                ISVALIDINPUT_TO_DEFAULT -> outputAnswer(fromYear, fromMonth, fromDay, toYear, 1, 1)
+                ISVALIDINPUT_ALL_DEFAULT->outputAnswer(fromYear,1,1,toYear, 1,1)
             }
+
 
         }
 
@@ -224,6 +227,61 @@ class MainActivity : AppCompatActivity() {
             datePickerDialog.show()
         }
         setContentView(view)
+    }
+
+    fun outputAnswer(fYear: Int, fMonth: Int, fDay: Int, tYear: Int, tMonth: Int, tDay: Int){
+        try{
+            var fromEvent = LocalDate.of(fYear, fMonth, fDay)
+            var toEvent = LocalDate.of(tYear, tMonth, tDay)
+            val string = Event.fullResponse(fromEvent, toEvent)
+            outputTextview.text = string
+        } catch (e:DateTimeException){
+            val string = "Invalid input, please check the following: \n" +
+                    "1. Feb 29 must fall on a leap year.\n" +
+                    "2. All fields must have valid input."
+            Log.e("DateTimeException", e.toString())
+            outputTextview.text  = string
+        }
+    }
+
+    fun isValidInput():Int{
+
+        //Ensure all valid fields have a valid input
+        Log.d("isValidInput", " fromMonth = ${fromMonth} fromDay = ${fromDay}" +
+                "\ntoMonth = ${toMonth} toDay = ${toDay}")
+        if(fromMonth == 0 && fromDay == 0 && toMonth == 0 && toDay == 0){
+            Log.d("isValidInput", "returned ISVALIDINPUT_ALL_DEFAULT")
+            return ISVALIDINPUT_ALL_DEFAULT
+        }
+        if(fromMonth == 0 && fromDay != 0) {
+            outputTextview.text = getString(R.string.from_month_missing)
+            Log.d("isValidInput", "returned ISVALIDINPUT_FALSE for missing from month")
+            return ISVALIDINPUT_FALSE
+        } else if(fromDay == 0 && fromMonth != 0){
+            outputTextview.text = getString(R.string.from_day_missing)
+            Log.d("isValidInput", "returned ISVALIDINPUT_FALSE for missing from day")
+            return ISVALIDINPUT_FALSE
+        } else if(fromMonth == 0 && fromDay == 0){
+            // Only from year has been input, then Month & Day are defaulted to Jan 1st
+            Log.d("isValidInput", "returned ISVALIDINPUT_FROM_DEFAULT")
+            return ISVALIDINPUT_FROM_DEFAULT
+        }
+
+        //Ensure all valid fields have a valid input
+        if(toMonth == 0 && toDay != 0) {
+            outputTextview.text = getString(R.string.to_month_missing)
+            Log.d("isValidInput", "returned ISVALIDINPUT_FALSE for missing to month")
+            return ISVALIDINPUT_FALSE
+        } else if(toDay == 0 && toMonth != 0){
+            outputTextview.text = getString(R.string.to_day_missing)
+            Log.d("isValidInput", "returned ISVALIDINPUT_FALSE for missing to day")
+            return ISVALIDINPUT_FALSE
+        } else if(toMonth == 0 && toDay == 0){
+            // Only from year has been input, then Month & Day are defaulted to Jan 1st.
+            Log.d("isValidInput", "returned ISVALIDINPUT_TO_DEFAULT")
+            return ISVALIDINPUT_TO_DEFAULT
+        }
+        return ISVALIDINPUT_TRUE
     }
 
 

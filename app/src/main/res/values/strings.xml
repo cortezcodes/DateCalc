@@ -12,9 +12,14 @@
     <string name="BC">B.C.</string>
 
     <!--Exception handling -->
-    <string name="fromYearException">From year invalid. Please input a valid year in the from field.</string>
-    <string name="toYearException">To year invalid. Please input a valid year in the to field.</string>
+    <string name="from_year_exception">From year invalid. Please input a valid year in the from field.</string>
+    <string name="to_year_exception">To year invalid. Please input a valid year in the to field.</string>
 
+    <!-- Missing Information Errors -->
+    <string name="from_month_missing">Please Input a valid from month</string>
+    <string name="to_month_missing">Please Input a valid to month</string>
+    <string name="from_day_missing">Please Input a valid from day</string>
+    <string name="to_day_missing">Please Input a valid to day</string>
     <string-array name="months_array">
         <item>Month</item>
         <item>January</item>
