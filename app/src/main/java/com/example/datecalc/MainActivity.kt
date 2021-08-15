@@ -78,7 +78,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
-                TODO("Not yet implemented")
+
             }
 
         }
@@ -110,7 +110,6 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
-                TODO("Not yet implemented")
             }
 
         }
@@ -158,6 +157,9 @@ class MainActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            Log.d("Checking Switches", "fromSwitch = ${fromADBCSwitch.isActivated} and " +
+                    "toSwitch = ${toADBCSwitch.isActivated}")
+            //TODO fix switches. always showing isActivated = false
             if(fromADBCSwitch.isActivated){ //check if AD BC switch is active
                 fromYear *= -1
                 Log.d("fromADBCSwitch","Switch is activated to B.C., year must" +
