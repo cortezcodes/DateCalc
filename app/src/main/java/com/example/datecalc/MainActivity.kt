@@ -146,26 +146,26 @@ class MainActivity : AppCompatActivity() {
                 fromYear = fromYearEditText.text.toString().toInt()
             } catch (e: NumberFormatException){
                 outputTextview.text = getString(R.string.from_year_exception)
-                Log.e("Retrieving fromYearEditText", e.toString())
+                Log.e("Retrieving_fromYearETxt", e.toString())
                 return@setOnClickListener
             }
             try { // catch exception if EditText is empty
                 toYear = toYearEditText.text.toString().toInt()
             }catch (e: NumberFormatException){
                 outputTextview.text = getString(R.string.to_year_exception)
-                Log.e("Retrieving toYearEditText", e.toString())
+                Log.e("Retrieving toYearETxt", e.toString())
                 return@setOnClickListener
             }
 
             Log.d("Checking Switches", "fromSwitch = ${fromADBCSwitch.isActivated} and " +
-                    "toSwitch = ${toADBCSwitch.isActivated}")
+                    "toSwitch = ${toADBCSwitch.isChecked}")
             //TODO fix switches. always showing isActivated = false
-            if(fromADBCSwitch.isActivated){ //check if AD BC switch is active
+            if(fromADBCSwitch.isChecked){ //check if AD BC switch is active
                 fromYear *= -1
                 Log.d("fromADBCSwitch","Switch is activated to B.C., year must" +
                         " be a negative value. fromYear = ${fromYear}")
             }
-            if(toADBCSwitch.isActivated){  //check if AD BC switch is active
+            if(toADBCSwitch.isChecked){  //check if AD BC switch is active
                 toYear *= -1
                 Log.d("toADBCSwitch","Switch is activated to B.C., year must" +
                         " be a negative value. toYear = ${toYear}")
@@ -292,4 +292,5 @@ class MainActivity : AppCompatActivity() {
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_item)
         return adapter
     }
+
 }
