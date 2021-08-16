@@ -104,9 +104,24 @@
         android:paddingStart="4dp"
         android:paddingEnd="16dp"
         android:hint="@string/year"
+        android:maxLength="9"
         android:background="@drawable/bg_year_edit_text"
         android:textColor="@color/white"
         android:textColorHint="@color/white"/>
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switch_from_bc_ad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/et_from_year"
+        app:layout_constraintStart_toStartOf="@id/et_from_year"
+        app:layout_constraintEnd_toEndOf="@id/et_from_year"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:theme="@style/SwitchCompatTheme"
+        app:showText="true"
+        android:textOn="@string/BC"
+        android:textOff="@string/AD"/>
 
     <ImageButton
         android:id="@+id/img_btn_from_calendar"
@@ -122,16 +137,17 @@
         android:background="@drawable/bg_calendar_btn"
         android:src="@drawable/ic_baseline_date_range_24"/>
 
+
     <TextView
         android:id="@+id/title_to"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/title_to"
         style="@style/Titles"
-        app:layout_constraintTop_toBottomOf="@+id/title_from"
+        app:layout_constraintTop_toBottomOf="@+id/switch_from_bc_ad"
         app:layout_constraintStart_toStartOf="parent"
         android:paddingStart="16dp"
-        android:paddingEnd="35dp"
+        android:paddingEnd="40dp"
         android:paddingTop="12dp"
         android:paddingBottom="12dp"/>
 
@@ -196,9 +212,25 @@
         android:paddingStart="4dp"
         android:paddingEnd="16dp"
         android:hint="@string/year"
+        android:maxLength="9"
         android:background="@drawable/bg_year_edit_text"
         android:textColor="@color/white"
         android:textColorHint="@color/white"/>
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switch_to_bc_ad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/et_to_year"
+        app:layout_constraintStart_toStartOf="@id/et_to_year"
+        app:layout_constraintEnd_toEndOf="@id/et_to_year"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:theme="@style/SwitchCompatTheme"
+        app:showText="true"
+        android:textOn="@string/BC"
+        android:textOff="@string/AD"/>
+
 
     <ImageButton
         android:id="@+id/img_btn_to_calendar"
@@ -213,6 +245,18 @@
         android:contentDescription="@string/img_btn_content_descriptor_calendar"
         android:background="@drawable/bg_calendar_btn"
         android:src="@drawable/ic_baseline_date_range_24"/>
+
+    <TextView
+        android:id="@+id/tv_output"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/switch_to_bc_ad"
+        android:layout_marginTop="48dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:gravity="center"
+        android:fontFamily="serif-monospace"
+        android:textColor="@color/white"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_calculate"
@@ -229,7 +273,7 @@
         android:background="@drawable/bg_btn_calculate"
         android:fontFamily="serif-monospace"
         android:textAlignment="center"
-        android:textSize="36dp"
+        android:textSize="36sp"
         android:textColor="@color/btn_text_color"
         android:text="@string/calculate"/>
 
