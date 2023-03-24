@@ -1,2 +1,3 @@
 # DateCalc
- Date calculator
+
+ Date calculator for Android mobile devices.
